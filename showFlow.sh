@@ -19,6 +19,9 @@ while  read -r -a words; do
       domain=""
     fi
     if [[ "$step" = "3" ]]; then
+      if [[ $(echo "${#word} < 2" | bc) = "1" ]]; then
+        word="0$word"
+      fi
       time="$time $word"
       timeStep=$(echo "$timeStep - 1" | bc)
       if [[ "$timeStep" = "0" ]]; then
