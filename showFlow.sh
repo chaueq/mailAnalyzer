@@ -26,24 +26,24 @@ while  read -r -a words; do
       timeStep=$(echo "$timeStep - 1" | bc)
       if [[ "$timeStep" = "0" ]]; then
         timeStep="5"
-        step="4"
+        step=$(echo "$step + 1" | bc)
       fi
     fi
     if [[ "$step" = "2" ]]; then
       if [[ -n "$(echo "$word" | grep -E "^(Mon|Tue|Wed|Thu|Fri|Sat|Sun),$")" ]]; then
         time="$word"
-        step="3"
+        step=$(echo "$step + 1" | bc)
       fi
     fi
     if [[ "$step" = "1" ]]; then
       if [[ -n "$(echo "$word" | grep -E "^\[?([-a-zA-Z0-9]+\.)+[-a-zA-Z0-9]+\]?$")" ]]; then
         domain="$word"
-        step="2"
+        step=$(echo "$step + 1" | bc)
       fi
     fi
     if [[ "$step" = "0" ]]; then
       if [[ -n "$(echo "$word" | grep -E "^Received:$")" ]]; then
-        step="1"
+        step=$(echo "$step + 1" | bc)
       fi
     fi
   done
